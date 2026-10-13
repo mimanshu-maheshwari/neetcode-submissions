@@ -1,0 +1,36 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        var curr = head;
+        ListNode prev = null;
+        while (curr != null && curr.next != null) {
+            prev = curr;
+            curr = curr.next;
+            // insert here 
+            var newNode = new ListNode(gcd(prev.val, curr.val), curr);
+            prev.next = newNode;
+        }
+
+        return head;
+    }
+
+    private int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+}
